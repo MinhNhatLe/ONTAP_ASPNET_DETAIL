@@ -1,0 +1,46 @@
+﻿@model IEnumerable<test_asp_mvc2.Models.KhachHang>
+
+@{
+    ViewBag.Title = "DanhSach";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<h2>DanhSach</h2>
+
+<p>
+    @Html.ActionLink("Them moi khach hang", "ThemMoi")
+</p>
+<table class="table">
+    <tr>
+        <th>
+            @Html.DisplayNameFor(model => model.TenKhachHang)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.SoDienThoai)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.DiaChi)
+        </th>
+        <th></th>
+    </tr>
+
+@foreach (var item in Model) {
+    <tr>
+        <td>
+            @Html.DisplayFor(modelItem => item.TenKhachHang)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.SoDienThoai)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.DiaChi)
+        </td>
+        <td>
+            @Html.ActionLink("Cập Nhật", "CapNhat", new { id=item.ID }) |
+            @Html.ActionLink("Chi tiết", "ChiTiet", new { id=item.ID }) |
+            @Html.ActionLink("Xóa", "Xoa", new { id=item.ID })
+        </td>
+    </tr>
+}
+
+</table>
