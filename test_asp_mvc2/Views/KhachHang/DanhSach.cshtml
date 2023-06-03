@@ -3,6 +3,10 @@
 @{
     ViewBag.Title = "DanhSach";
     Layout = "~/Views/Shared/_Layout.cshtml";
+
+    // khai báo trên này cho tiện
+    test_asp_mvc2.Models.QuanLyBanHang_TestEntities db = new test_asp_mvc2.Models.QuanLyBanHang_TestEntities();
+
 }
 
 <h2>DanhSach</h2>
@@ -21,26 +25,48 @@
         <th>
             @Html.DisplayNameFor(model => model.DiaChi)
         </th>
-        <th></th>
+        <th>
+            Loại khách hàng
+        </th>
     </tr>
 
-@foreach (var item in Model) {
-    <tr>
-        <td>
-            @Html.DisplayFor(modelItem => item.TenKhachHang)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.SoDienThoai)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.DiaChi)
-        </td>
-        <td>
-            @Html.ActionLink("Cập Nhật", "CapNhat", new { id=item.ID }) |
-            @Html.ActionLink("Chi tiết", "ChiTiet", new { id=item.ID }) |
-            @Html.ActionLink("Xóa", "Xoa", new { id=item.ID })
-        </td>
-    </tr>
-}
+    @foreach (var item in Model)
+    {
+        <tr>
+            <td>
+                @Html.DisplayFor(modelItem => item.TenKhachHang)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.SoDienThoai)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.DiaChi)
+            </td>
+            <td>
+                @*Cách 1*@
+                @{
+                    // tìm cái id của bảng LoaiKhachHang cái ả
+                    var loaiKhachHang = db.LoaiKhachHangs.Find(item.idLoaiKhachHang);
+                    if (loaiKhachHang != null)
+                    {
+                        <span>@loaiKhachHang.TenPhanLoai</span>
+                    }
+                }
+
+                @*Cách 2*@
+                @{
+                    if (item.LoaiKhachHang != null)
+                    {
+                        <span>@item.LoaiKhachHang.TenPhanLoai</span>
+                    }
+                }
+            </td>
+            <td>
+                @Html.ActionLink("Cập Nhật", "CapNhat", new { id = item.ID }) |
+                @Html.ActionLink("Chi tiết", "ChiTiet", new { id = item.ID }) |
+                @Html.ActionLink("Xóa", "Xoa", new { id = item.ID })
+            </td>
+        </tr>
+    }
 
 </table>
