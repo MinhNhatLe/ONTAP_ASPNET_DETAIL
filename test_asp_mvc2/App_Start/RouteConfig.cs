@@ -16,7 +16,7 @@ namespace test_asp_mvc2
             routes.MapRoute(
                 name: "Default",
                 url: "{controller}/{action}/{id}",
-                defaults: new { controller = "Home", action = "Index", id = UrlParameter.Optional }
+                defaults: new { controller = "KhachHang", action = "DanhSach", id = UrlParameter.Optional }
             );
         }
     }
