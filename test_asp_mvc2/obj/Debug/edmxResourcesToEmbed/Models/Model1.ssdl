@@ -8,6 +8,14 @@
     <Property Name="TenKhachHang" Type="nvarchar" MaxLength="50" />
     <Property Name="SoDienThoai" Type="nvarchar" MaxLength="50" />
     <Property Name="DiaChi" Type="nvarchar" MaxLength="100" />
+    <Property Name="idLoaiKhachHang" Type="int" />
+  </EntityType>
+  <EntityType Name="LoaiKhachHang">
+    <Key>
+      <PropertyRef Name="ID" />
+    </Key>
+    <Property Name="ID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="TenPhanLoai" Type="nvarchar" MaxLength="100" />
   </EntityType>
   <EntityType Name="MayTinh">
     <Key>
@@ -18,8 +26,25 @@
     <Property Name="HangSanXuat" Type="nvarchar" MaxLength="50" />
     <Property Name="NamSanXuat" Type="int" />
   </EntityType>
+  <Association Name="FK_KhachHang_LoaiKhachHang">
+    <End Role="LoaiKhachHang" Type="Self.LoaiKhachHang" Multiplicity="0..1" />
+    <End Role="KhachHang" Type="Self.KhachHang" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="LoaiKhachHang">
+        <PropertyRef Name="ID" />
+      </Principal>
+      <Dependent Role="KhachHang">
+        <PropertyRef Name="idLoaiKhachHang" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
   <EntityContainer Name="QuanLyBanHang_TestModelStoreContainer">
     <EntitySet Name="KhachHang" EntityType="Self.KhachHang" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="LoaiKhachHang" EntityType="Self.LoaiKhachHang" Schema="dbo" store:Type="Tables" />
     <EntitySet Name="MayTinh" EntityType="Self.MayTinh" Schema="dbo" store:Type="Tables" />
+    <AssociationSet Name="FK_KhachHang_LoaiKhachHang" Association="Self.FK_KhachHang_LoaiKhachHang">
+      <End Role="LoaiKhachHang" EntitySet="LoaiKhachHang" />
+      <End Role="KhachHang" EntitySet="KhachHang" />
+    </AssociationSet>
   </EntityContainer>
 </Schema>

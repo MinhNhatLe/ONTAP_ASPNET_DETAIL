@@ -27,5 +27,6 @@ namespace test_asp_mvc2.Models
     
         public virtual DbSet<KhachHang> KhachHangs { get; set; }
         public virtual DbSet<MayTinh> MayTinhs { get; set; }
+        public virtual DbSet<LoaiKhachHang> LoaiKhachHangs { get; set; }
     }
 }

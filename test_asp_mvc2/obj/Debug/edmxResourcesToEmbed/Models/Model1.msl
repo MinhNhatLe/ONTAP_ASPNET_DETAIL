@@ -4,6 +4,7 @@
     <EntitySetMapping Name="KhachHangs">
       <EntityTypeMapping TypeName="QuanLyBanHang_TestModel.KhachHang">
         <MappingFragment StoreEntitySet="KhachHang">
+          <ScalarProperty Name="idLoaiKhachHang" ColumnName="idLoaiKhachHang" />
           <ScalarProperty Name="ID" ColumnName="ID" />
           <ScalarProperty Name="TenKhachHang" ColumnName="TenKhachHang" />
           <ScalarProperty Name="SoDienThoai" ColumnName="SoDienThoai" />
@@ -18,6 +19,14 @@
           <ScalarProperty Name="TenMayTinh" ColumnName="TenMayTinh" />
           <ScalarProperty Name="HangSanXuat" ColumnName="HangSanXuat" />
           <ScalarProperty Name="NamSanXuat" ColumnName="NamSanXuat" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="LoaiKhachHangs">
+      <EntityTypeMapping TypeName="QuanLyBanHang_TestModel.LoaiKhachHang">
+        <MappingFragment StoreEntitySet="LoaiKhachHang">
+          <ScalarProperty Name="TenPhanLoai" ColumnName="TenPhanLoai" />
+          <ScalarProperty Name="ID" ColumnName="ID" />
         </MappingFragment>
       </EntityTypeMapping>
     </EntitySetMapping>

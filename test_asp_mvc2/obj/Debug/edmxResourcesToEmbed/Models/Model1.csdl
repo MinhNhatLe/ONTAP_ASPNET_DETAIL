@@ -8,6 +8,8 @@
     <Property Name="TenKhachHang" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
     <Property Name="SoDienThoai" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
     <Property Name="DiaChi" Type="String" MaxLength="100" FixedLength="false" Unicode="true" />
+    <Property Name="idLoaiKhachHang" Type="Int32" />
+    <NavigationProperty Name="LoaiKhachHang" Relationship="QuanLyBanHang_TestModel.FK_KhachHang_LoaiKhachHang" FromRole="KhachHang" ToRole="LoaiKhachHang" />
   </EntityType>
   <EntityType Name="MayTinh">
     <Key>
@@ -21,5 +23,30 @@
   <EntityContainer Name="QuanLyBanHang_TestEntities" annotation:LazyLoadingEnabled="true">
     <EntitySet Name="KhachHangs" EntityType="Self.KhachHang" />
     <EntitySet Name="MayTinhs" EntityType="Self.MayTinh" />
+    <EntitySet Name="LoaiKhachHangs" EntityType="QuanLyBanHang_TestModel.LoaiKhachHang" />
+    <AssociationSet Name="FK_KhachHang_LoaiKhachHang" Association="QuanLyBanHang_TestModel.FK_KhachHang_LoaiKhachHang">
+      <End Role="LoaiKhachHang" EntitySet="LoaiKhachHangs" />
+      <End Role="KhachHang" EntitySet="KhachHangs" />
+    </AssociationSet>
   </EntityContainer>
+  <EntityType Name="LoaiKhachHang">
+    <Key>
+      <PropertyRef Name="ID" />
+    </Key>
+    <Property Name="ID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="TenPhanLoai" Type="String" MaxLength="100" FixedLength="false" Unicode="true" />
+    <NavigationProperty Name="KhachHangs" Relationship="QuanLyBanHang_TestModel.FK_KhachHang_LoaiKhachHang" FromRole="LoaiKhachHang" ToRole="KhachHang" />
+  </EntityType>
+  <Association Name="FK_KhachHang_LoaiKhachHang">
+    <End Type="QuanLyBanHang_TestModel.LoaiKhachHang" Role="LoaiKhachHang" Multiplicity="0..1" />
+    <End Type="QuanLyBanHang_TestModel.KhachHang" Role="KhachHang" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="LoaiKhachHang">
+        <PropertyRef Name="ID" />
+      </Principal>
+      <Dependent Role="KhachHang">
+        <PropertyRef Name="idLoaiKhachHang" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
 </Schema>

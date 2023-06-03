@@ -12,14 +12,18 @@ namespace test_asp_mvc2.Models
     using System;
     using System.Collections.Generic;
     
-    public partial class KhachHang
+    public partial class LoaiKhachHang
     {
-        public int ID { get; set; }
-        public string TenKhachHang { get; set; }
-        public string SoDienThoai { get; set; }
-        public string DiaChi { get; set; }
-        public Nullable<int> idLoaiKhachHang { get; set; }
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2214:DoNotCallOverridableMethodsInConstructors")]
+        public LoaiKhachHang()
+        {
+            this.KhachHangs = new HashSet<KhachHang>();
+        }
     
-        public virtual LoaiKhachHang LoaiKhachHang { get; set; }
+        public int ID { get; set; }
+        public string TenPhanLoai { get; set; }
+    
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
+        public virtual ICollection<KhachHang> KhachHangs { get; set; }
     }
 }

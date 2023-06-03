@@ -7,6 +7,8 @@
       <Diagram DiagramId="0f1025e39d1248ea8eeebc931d843e62" Name="Diagram1">
         <EntityTypeShape EntityType="QuanLyBanHang_TestModel.KhachHang" Width="1.5" PointX="0.75" PointY="0.75" IsExpanded="true" />
         <EntityTypeShape EntityType="QuanLyBanHang_TestModel.MayTinh" Width="1.5" PointX="2.75" PointY="0.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="QuanLyBanHang_TestModel.LoaiKhachHang" Width="1.5" PointX="0.75" PointY="4" />
+        <AssociationConnector Association="QuanLyBanHang_TestModel.FK_KhachHang_LoaiKhachHang" />
       </Diagram>
     </edmx:Diagrams>
   </edmx:Designer>
