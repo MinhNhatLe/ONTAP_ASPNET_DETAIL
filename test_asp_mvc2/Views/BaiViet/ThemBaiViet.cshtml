@@ -1,0 +1,133 @@
+﻿@model test_asp_mvc2.Models.BaiViet
+
+@{
+    ViewBag.Title = "ThemBaiViet";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+    test_asp_mvc2.Models.QuanLyBanHang_TestEntities db = new test_asp_mvc2.Models.QuanLyBanHang_TestEntities();
+
+}
+
+<h2>ThemBaiViet</h2>
+
+@using (Html.BeginForm()) 
+{
+    @Html.AntiForgeryToken()
+    
+    <div class="form-horizontal">
+        <h4>BaiViet</h4>
+        <hr />
+        @Html.ValidationSummary(true, "", new { @class = "text-danger" })
+        <div class="form-group">
+            @Html.LabelFor(model => model.TenBaiViet, htmlAttributes: new { @class = "control-label col-md-2" })
+            <div class="col-md-10">
+                @Html.EditorFor(model => model.TenBaiViet, new { htmlAttributes = new { @class = "form-control" } })
+                @Html.ValidationMessageFor(model => model.TenBaiViet, "", new { @class = "text-danger" })
+            </div>
+        </div>
+
+        <div class="form-group">
+            @Html.LabelFor(model => model.MoTa, htmlAttributes: new { @class = "control-label col-md-2" })
+            <div class="col-md-10">
+                @Html.EditorFor(model => model.MoTa, new { htmlAttributes = new { @class = "form-control" } })
+                @Html.ValidationMessageFor(model => model.MoTa, "", new { @class = "text-danger" })
+            </div>
+        </div>
+
+        @*<div class="form-group">
+            @Html.LabelFor(model => model.NgayViet, htmlAttributes: new { @class = "control-label col-md-2" })
+            <div class="col-md-10">
+                @Html.EditorFor(model => model.NgayViet, new { htmlAttributes = new { @class = "form-control" } })
+                @Html.ValidationMessageFor(model => model.NgayViet, "", new { @class = "text-danger" })
+            </div>
+        </div>*@
+        <div class="form-group">
+            @Html.LabelFor(model => model.NgayViet, htmlAttributes: new { @class = "control-label col-md-2" })
+            <div class="col-md-10">
+                @Html.EditorFor(model => model.NgayViet, new { htmlAttributes = new { @class = "form-control", type = "datetime-local" } })
+                @Html.ValidationMessageFor(model => model.NgayViet, "", new { @class = "text-danger" })
+            </div>
+        </div>
+
+        <div class="form-group">
+            @Html.LabelFor(model => model.NguoiViet, htmlAttributes: new { @class = "control-label col-md-2" })
+            <div class="col-md-10">
+                @Html.EditorFor(model => model.NguoiViet, new { htmlAttributes = new { @class = "form-control" } })
+                @Html.ValidationMessageFor(model => model.NguoiViet, "", new { @class = "text-danger" })
+            </div>
+        </div>
+
+        @*<div class="form-group">
+            @Html.LabelFor(model => model.NoiDung, htmlAttributes: new { @class = "control-label col-md-2" })
+            <div class="col-md-10">
+                @Html.EditorFor(model => model.NoiDung, new { htmlAttributes = new { @class = "form-control" } })
+                @Html.ValidationMessageFor(model => model.NoiDung, "", new { @class = "text-danger" })
+            </div>
+        </div>*@
+        <div class="form-group">
+            @Html.LabelFor(model => model.NoiDung, htmlAttributes: new { @class = "control-label col-md-2" })
+            <div class="col-md-10">
+                <textarea name="NoiDung"></textarea>
+                @Html.ValidationMessageFor(model => model.NoiDung, "", new { @class = "text-danger" })
+            </div>
+        </div>
+
+        @*<div class="form-group">
+            @Html.LabelFor(model => model.HinhAnh, htmlAttributes: new { @class = "control-label col-md-2" })
+            <div class="col-md-10">
+                @Html.EditorFor(model => model.HinhAnh, new { htmlAttributes = new { @class = "form-control" } })
+                @Html.ValidationMessageFor(model => model.HinhAnh, "", new { @class = "text-danger" })
+            </div>
+        </div>*@
+        <div class="form-group">
+            @Html.LabelFor(model => model.HinhAnh, htmlAttributes: new { @class = "control-label col-md-2" })
+            <div class="col-md-10">
+                <input type="file" name="HinhAnh" />
+                @Html.ValidationMessageFor(model => model.HinhAnh, "", new { @class = "text-danger" })
+            </div>
+        </div>
+
+        <div class="form-group">
+            @Html.LabelFor(model => model.HienThi, htmlAttributes: new { @class = "control-label col-md-2" })
+            <div class="col-md-10">
+                <div class="checkbox">
+                    @Html.EditorFor(model => model.HienThi)
+                    @Html.ValidationMessageFor(model => model.HienThi, "", new { @class = "text-danger" })
+                </div>
+            </div>
+        </div>
+
+        <div class="form-group">
+            @Html.LabelFor(model => model.ThuTu, htmlAttributes: new { @class = "control-label col-md-2" })
+            <div class="col-md-10">
+                @Html.EditorFor(model => model.ThuTu, new { htmlAttributes = new { @class = "form-control" } })
+                @Html.ValidationMessageFor(model => model.ThuTu, "", new { @class = "text-danger" })
+            </div>
+        </div>
+
+        @*<div class="form-group">
+            @Html.LabelFor(model => model.idBaiViet, "idBaiViet", htmlAttributes: new { @class = "control-label col-md-2" })
+            <div class="col-md-10">
+                @Html.DropDownList("idBaiViet", null, htmlAttributes: new { @class = "form-control" })
+                @Html.ValidationMessageFor(model => model.idBaiViet, "", new { @class = "text-danger" })
+            </div>
+        </div>*@
+        <div class="form-group">
+            @Html.LabelFor(model => model.idBaiViet, htmlAttributes: new { @class = "control-label col-md-2" })
+            <div class="col-md-10">
+                <select class="form-control" name="idBaiViet">
+                    @foreach(var item in db.LoaiBaiViets.ToList())
+                {
+                    <option value="@item.ID">@item.TenLoai</option>
+                }
+                </select>
+            </div>
+        </div>
+
+        <div class="form-group">
+            <div class="col-md-offset-2 col-md-10">
+                <input type="submit" value="Create" class="btn btn-default" />
+            </div>
+        </div>
+    </div>
+}
+

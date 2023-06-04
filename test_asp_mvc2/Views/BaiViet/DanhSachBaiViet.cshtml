@@ -1,0 +1,90 @@
+﻿@model IEnumerable<test_asp_mvc2.Models.BaiViet>
+
+@{
+    ViewBag.Title = "DanhSachBaiViet";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+    test_asp_mvc2.Models.QuanLyBanHang_TestEntities db = new test_asp_mvc2.Models.QuanLyBanHang_TestEntities();
+
+}
+
+<h2>DanhSachBaiViet</h2>
+
+<p>
+    @Html.ActionLink("them bai viet", "ThemBaiViet")
+</p>
+<table class="table">
+    <tr>
+        <th>
+            @Html.DisplayNameFor(model => model.TenBaiViet)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.MoTa)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.NgayViet)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.NguoiViet)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.NoiDung)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.HinhAnh)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.HienThi)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.ThuTu)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.LoaiBaiViet.TenLoai)
+        </th>
+        <th></th>
+    </tr>
+
+@foreach (var item in Model) {
+    <tr>
+        <td>
+            @Html.DisplayFor(modelItem => item.TenBaiViet)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.MoTa)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.NgayViet)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.NguoiViet)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.NoiDung)
+        </td>
+        <td>
+            @*@Html.DisplayFor(modelItem => item.HinhAnh)*@
+            <img src="~/Content/asset/img/@item.HinhAnh" style="width: 60%; height: 40px; border-radius:100%"/>
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.HienThi)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.ThuTu)
+        </td>
+        <td>
+            @{
+                if (item.LoaiBaiViet != null)
+                {
+                    <span>@item.LoaiBaiViet.TenLoai</span>
+                }
+            }
+        </td>
+        <td>
+            @Html.ActionLink("cap nhat", "CapNhatBaiViet", new { id=item.ID }) |
+            @Html.ActionLink("Details", "Details", new { id=item.ID }) |
+            @Html.ActionLink("xoa", "XoaBaiViet", new { id=item.ID })
+        </td>
+    </tr>
+}
+
+</table>
