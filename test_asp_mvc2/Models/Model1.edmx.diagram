@@ -9,6 +9,9 @@
         <EntityTypeShape EntityType="QuanLyBanHang_TestModel.MayTinh" Width="1.5" PointX="2.75" PointY="0.75" IsExpanded="true" />
         <EntityTypeShape EntityType="QuanLyBanHang_TestModel.LoaiKhachHang" Width="1.5" PointX="0.75" PointY="4" />
         <AssociationConnector Association="QuanLyBanHang_TestModel.FK_KhachHang_LoaiKhachHang" />
+        <EntityTypeShape EntityType="QuanLyBanHang_TestModel.BaiViet" Width="1.5" PointX="5.625" PointY="4" />
+        <EntityTypeShape EntityType="QuanLyBanHang_TestModel.LoaiBaiViet" Width="1.5" PointX="3.375" PointY="4.75" />
+        <AssociationConnector Association="QuanLyBanHang_TestModel.FK_BaiViet_LoaiBaiViet" />
       </Diagram>
     </edmx:Diagrams>
   </edmx:Designer>

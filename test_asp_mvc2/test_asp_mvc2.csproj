@@ -128,13 +128,21 @@
     <Compile Include="App_Start\BundleConfig.cs" />
     <Compile Include="App_Start\FilterConfig.cs" />
     <Compile Include="App_Start\RouteConfig.cs" />
+    <Compile Include="Controllers\BaiVietController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
     <Compile Include="Controllers\KhachHangController.cs" />
+    <Compile Include="Controllers\LoaiBaiVietController.cs" />
     <Compile Include="Controllers\LoaiKhachHangController.cs" />
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
+    <Compile Include="Models\BaiViet.cs">
+      <DependentUpon>Model1.tt</DependentUpon>
+    </Compile>
     <Compile Include="Models\KhachHang.cs">
+      <DependentUpon>Model1.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\LoaiBaiViet.cs">
       <DependentUpon>Model1.tt</DependentUpon>
     </Compile>
     <Compile Include="Models\LoaiKhachHang.cs">
@@ -161,6 +169,7 @@
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>
+    <Content Include="Content\asset\img\Picture.png" />
     <Content Include="Content\bootstrap-theme.css" />
     <Content Include="Content\bootstrap-theme.min.css" />
     <Content Include="Content\bootstrap.css" />
@@ -216,6 +225,12 @@
     <Content Include="Views\LoaiKhachHang\DanhSachLoaiKhachHang.cshtml" />
     <Content Include="Views\LoaiKhachHang\ThemLoaiKhachHang.cshtml" />
     <Content Include="Views\LoaiKhachHang\CapNhatLoaiKhachHang.cshtml" />
+    <Content Include="Views\LoaiBaiViet\DanhSach.cshtml" />
+    <Content Include="Views\LoaiBaiViet\ThemLoaiBaiViet.cshtml" />
+    <Content Include="Views\LoaiBaiViet\CapNhatLoaiBaiViet.cshtml" />
+    <Content Include="Views\BaiViet\DanhSachBaiViet.cshtml" />
+    <Content Include="Views\BaiViet\ThemBaiViet.cshtml" />
+    <Content Include="Views\BaiViet\CapNhatBaiViet.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
