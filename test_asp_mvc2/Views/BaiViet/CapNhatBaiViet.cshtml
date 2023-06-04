@@ -12,7 +12,7 @@
 @using (Html.BeginForm())
 {
     @Html.AntiForgeryToken()
-    
+
     <div class="form-horizontal">
         <h4>BaiViet</h4>
         <hr />
@@ -54,11 +54,12 @@
         <div class="form-group">
             @Html.LabelFor(model => model.NoiDung, htmlAttributes: new { @class = "control-label col-md-2" })
             <div class="col-md-10">
-                @Html.EditorFor(model => model.NoiDung, new { htmlAttributes = new { @class = "form-control" } })
+                @*@Html.EditorFor(model => model.NoiDung, new { htmlAttributes = new { @class = "form-control" } })*@
+                <textarea name="NoiDung" class="form-control" id="inputNoiDung" >@Model.NoiDung</textarea>
                 @Html.ValidationMessageFor(model => model.NoiDung, "", new { @class = "text-danger" })
             </div>
         </div>
-        
+
 
         <div class="form-group">
             @Html.LabelFor(model => model.HinhAnh, htmlAttributes: new { @class = "control-label col-md-2" })
@@ -72,7 +73,8 @@
             @Html.LabelFor(model => model.HienThi, htmlAttributes: new { @class = "control-label col-md-2" })
             <div class="col-md-10">
                 <div class="checkbox">
-                    @Html.EditorFor(model => model.HienThi)
+                    <input type="checkbox" value="true" name="HienThi" @Html.Raw(Model.HienThi == true ? "checked" : "") />
+                    @*@Html.EditorFor(model => model.HienThi)*@
                     @Html.ValidationMessageFor(model => model.HienThi, "", new { @class = "text-danger" })
                 </div>
             </div>
@@ -86,21 +88,15 @@
             </div>
         </div>
 
-        @*<div class="form-group">
-            @Html.LabelFor(model => model.idBaiViet, "idBaiViet", htmlAttributes: new { @class = "control-label col-md-2" })
-            <div class="col-md-10">
-                @Html.DropDownList("idBaiViet", null, htmlAttributes: new { @class = "form-control" })
-                @Html.ValidationMessageFor(model => model.idBaiViet, "", new { @class = "text-danger" })
-            </div>
-        </div>*@
+
         <div class="form-group">
             @Html.LabelFor(model => model.idBaiViet, htmlAttributes: new { @class = "control-label col-md-2" })
             <div class="col-md-10">
                 <select class="form-control" name="idBaiViet">
-                    @foreach(var item in db.LoaiBaiViets.ToList())
-                {
-                    <option value="@item.ID" @Html.Raw(item.ID == Model.idBaiViet ? "selected" : "")>@item.TenLoai</option>
-                }
+                    @foreach (var item in db.LoaiBaiViets.ToList())
+                    {
+                        <option value="@item.ID" @Html.Raw(item.ID == Model.idBaiViet ? "selected" : "")>@item.TenLoai</option>
+                    }
                 </select>
             </div>
         </div>
@@ -113,3 +109,8 @@
     </div>
 }
 
+@section scripts{
+    <script>
+        CKEDITOR.replace('inputNoiDung')
+    </script>
+}

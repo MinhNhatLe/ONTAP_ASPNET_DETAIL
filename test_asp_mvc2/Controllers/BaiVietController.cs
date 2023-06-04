@@ -19,14 +19,34 @@ namespace test_asp_mvc2.Controllers
 
         public ActionResult ThemBaiViet()
         {
-            return View();
+            return View(new BaiViet());
         }
         [HttpPost]
+        [ValidateInput(false)]
+        // Các bước sử dụng CKEditor
+        //1: tải bộ plugin vào project
+        //2: kéo file js vào layout
+        //3: thay đổi input bằng textarea và đặt id cho input đó
+        //4: viết lệnh js cho textarea
+        //5: lưu dữ liệu: - tắt hàm kiểm tra HTMl cho action Lưu dữ liệu [ValidateInput(false)]
         public ActionResult ThemBaiViet(BaiViet model)
         {
-            db.BaiViets.Add(model);
-            db.SaveChanges();
-            return RedirectToAction("DanhSachBaiViet");
+            if (string.IsNullOrEmpty(model.TenBaiViet) == true)
+            {
+                ModelState.AddModelError("", "Thieu thong tin ten bai viet");
+                return View(model);
+            }
+            try
+            {
+                db.BaiViets.Add(model);
+                db.SaveChanges();
+                return RedirectToAction("DanhSachBaiViet");
+            }
+            catch(Exception ex)
+            {
+                ModelState.AddModelError("", ex.Message);
+                return View(model);
+            }            
         }
 
         public ActionResult CapNhatBaiViet(int id)
@@ -35,22 +55,35 @@ namespace test_asp_mvc2.Controllers
             return View(tenBaiViet);
         }
         [HttpPost]
+        [ValidateInput(false)]
         public ActionResult CapNhatBaiViet(BaiViet model, int id)
         {
+            if (string.IsNullOrEmpty(model.TenBaiViet) == true)
+            {
+                ModelState.AddModelError("", "Thieu thong tin ten bai viet");
+                return View(model);
+            }
             var tenBaiViet = db.BaiViets.Find(id);
+            try
+            {
+                tenBaiViet.TenBaiViet = model.TenBaiViet;
+                tenBaiViet.MoTa = model.MoTa;
+                tenBaiViet.NgayViet = model.NgayViet;
+                tenBaiViet.NguoiViet = model.NguoiViet;
+                tenBaiViet.NoiDung = model.NoiDung;
+                tenBaiViet.HinhAnh = model.HinhAnh;
+                tenBaiViet.HienThi = model.HienThi;
+                tenBaiViet.ThuTu = model.ThuTu;
+                tenBaiViet.idBaiViet = model.idBaiViet;
 
-            tenBaiViet.TenBaiViet = model.TenBaiViet;
-            tenBaiViet.MoTa = model.MoTa;
-            tenBaiViet.NgayViet = model.NgayViet;
-            tenBaiViet.NguoiViet = model.NguoiViet;
-            tenBaiViet.NoiDung = model.NoiDung;
-            tenBaiViet.HinhAnh = model.HinhAnh;
-            tenBaiViet.HienThi = model.HienThi;
-            tenBaiViet.ThuTu = model.ThuTu;
-            tenBaiViet.idBaiViet = model.idBaiViet;
-
-            db.SaveChanges();
-            return RedirectToAction("DanhSachBaiViet");
+                db.SaveChanges();
+                return RedirectToAction("DanhSachBaiViet");
+            }
+            catch (Exception ex)
+            {
+                ModelState.AddModelError("", ex.Message);
+                return View(model);
+            }
         }
 
         public ActionResult XoaBaiViet(int id)

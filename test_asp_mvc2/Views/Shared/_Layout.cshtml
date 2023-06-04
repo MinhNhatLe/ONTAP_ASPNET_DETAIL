@@ -20,13 +20,11 @@
             </div>
             <div class="navbar-collapse collapse">
                 <ul class="nav navbar-nav">
-                    <li>@Html.ActionLink("DanhSach", "DanhSach", "KhachHang")</li>
+                    <li>@Html.ActionLink("khach hang", "DanhSach", "KhachHang")</li>
                     <li>@Html.ActionLink("Danh Sach loai khach hang", "DanhSachLoaiKhachHang", "LoaiKhachHang")</li>
                     <li>@Html.ActionLink("Danh Sach loai bai viet", "DanhSach", "LoaiBaiViet")</li>
-                    <li>@Html.ActionLink("Danh Sach bai viet", "DanhSachBaiViet", "BaiViet")</li>
+                    <li>@Html.ActionLink("bai viet", "DanhSachBaiViet", "BaiViet")</li>
 
-                    <li>@Html.ActionLink("About", "About", "Home")</li>
-                    <li>@Html.ActionLink("Contact", "Contact", "Home")</li>
                 </ul>
             </div>
         </div>
@@ -38,7 +36,7 @@
             <p>&copy; @DateTime.Now.Year - My ASP.NET Application</p>
         </footer>
     </div>
-
+    <script src="~/Content/plugin/plugin/ckeditor/ckeditor.js"></script>
     @Scripts.Render("~/bundles/jquery")
     @Scripts.Render("~/bundles/bootstrap")
     @RenderSection("scripts", required: false)

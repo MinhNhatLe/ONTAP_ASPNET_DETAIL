@@ -25,9 +25,24 @@ namespace test_asp_mvc2.Controllers
         [HttpPost]
         public ActionResult ThemLoaiBaiViet(LoaiBaiViet model)
         {
-            db.LoaiBaiViets.Add(model);
-            db.SaveChanges();
-            return RedirectToAction("DanhSach");
+            if (string.IsNullOrEmpty(model.TenLoai) == true)
+            {
+                ModelState.AddModelError("", "Thieu thong tin ten loai bai viet");
+                return View(model);
+            }
+
+            try
+            {
+                db.LoaiBaiViets.Add(model);
+                db.SaveChanges();
+                return RedirectToAction("DanhSach");
+            }
+            catch(Exception ex)
+            {
+                ModelState.AddModelError("", ex.Message);
+                return View(model);
+            }
+            
         }
 
         public ActionResult CapNhatLoaiBaiViet(int id)
@@ -38,11 +53,25 @@ namespace test_asp_mvc2.Controllers
         [HttpPost]
         public ActionResult CapNhatLoaiBaiViet(LoaiBaiViet model,int id)
         {
-            var tenLoai = db.LoaiBaiViets.Find(id);
+            if (string.IsNullOrEmpty(model.TenLoai) == true)
+            {
+                ModelState.AddModelError("", "Thieu thong tin ten loai bai viet");
+                return View(model);
+            }
 
-            tenLoai.TenLoai = model.TenLoai;
-            db.SaveChanges();
-            return RedirectToAction("DanhSach");
+                var tenLoai = db.LoaiBaiViets.Find(id);
+            try
+            {
+
+                tenLoai.TenLoai = model.TenLoai;
+                db.SaveChanges();
+                return RedirectToAction("DanhSach");
+            }
+            catch (Exception ex)
+            {
+                ModelState.AddModelError("", ex.Message);
+                return View(model);
+            }
         }
 
         public ActionResult XoaLoaibaiViet(int id)
