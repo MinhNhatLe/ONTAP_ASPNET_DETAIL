@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Data.Entity.Migrations;
 using System.Linq;
 using System.Web;
 using System.Web.Mvc;
@@ -58,30 +59,31 @@ namespace test_asp_mvc2.Controllers
         [ValidateInput(false)]
         public ActionResult CapNhatBaiViet(BaiViet model, int id)
         {
-            if (string.IsNullOrEmpty(model.TenBaiViet) == true)
-            {
-                ModelState.AddModelError("", "Thieu thong tin ten bai viet");
-                return View(model);
-            }
-            var tenBaiViet = db.BaiViets.Find(id);
+            //if (string.IsNullOrEmpty(model.TenBaiViet) == true)
+            //{
+            //    ModelState.AddModelError("", "Thieu thong tin ten bai viet");
+            //    return View(model);
+            //}
             try
             {
-                tenBaiViet.TenBaiViet = model.TenBaiViet;
-                tenBaiViet.MoTa = model.MoTa;
-                tenBaiViet.NgayViet = model.NgayViet;
-                tenBaiViet.NguoiViet = model.NguoiViet;
-                tenBaiViet.NoiDung = model.NoiDung;
-                tenBaiViet.HinhAnh = model.HinhAnh;
-                tenBaiViet.HienThi = model.HienThi;
-                tenBaiViet.ThuTu = model.ThuTu;
-                tenBaiViet.idBaiViet = model.idBaiViet;
+                    //var tenBaiViet = db.BaiViets.Find(id);
+                    BaiViet tenBaiViet = db.BaiViets.FirstOrDefault(s => s.idBaiViet == model.idBaiViet);
 
-                db.SaveChanges();
-                return RedirectToAction("DanhSachBaiViet");
+                    tenBaiViet.TenBaiViet = model.TenBaiViet;
+                    tenBaiViet.MoTa = model.MoTa;
+                    tenBaiViet.NgayViet = model.NgayViet;
+                    tenBaiViet.NguoiViet = model.NguoiViet;
+                    tenBaiViet.NoiDung = model.NoiDung;
+                    tenBaiViet.HinhAnh = model.HinhAnh;
+                    tenBaiViet.HienThi = model.HienThi;
+                    tenBaiViet.ThuTu = model.ThuTu;
+                    tenBaiViet.idBaiViet = model.idBaiViet;
+                    db.SaveChanges();
+                    return RedirectToAction("DanhSachBaiViet");
+
             }
-            catch (Exception ex)
+            catch 
             {
-                ModelState.AddModelError("", ex.Message);
                 return View(model);
             }
         }
